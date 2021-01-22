@@ -19,16 +19,21 @@ logging.basicConfig(
 
 
 class ConnectDatabase:
-    # def __init__(self, cur):
-    #     self.cur = cur
+    def __init__(self, db):
+        conf = self.get_conf(db)
+        self.host = conf['host']
+        self.user = conf['user']
+        self.password = conf['password']
+        self.db = conf['database']
+        self.port = conf['port']
 
     def get_conf(self, db):
         with open("dbConfig.json", "r", encoding="utf-8") as f:
             conf = json.load(f)
         return conf[db]
 
-    def connect_db(self, host, user, password, db, port):
-        conn = pymysql.connect(host, user, password, db, port, charset="utf8")  # 最好加上utf-8
+    def connect_db(self):
+        conn = pymysql.connect(self.host, self.user, self.password, self.db, self.port, charset="utf8")  # 最好加上utf-8
         cur = conn.cursor()
         return conn, cur
 

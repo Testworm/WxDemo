@@ -1,10 +1,8 @@
 from DBConnector import *
 import random
 
-connectDB = ConnectDatabase()
-get_conf = connectDB.get_conf(db='wx')
-conn, cur = connectDB.connect_db(get_conf["host"], get_conf["user"],
-                     get_conf["password"], get_conf["database"], get_conf["port"])
+connectDB = ConnectDatabase('wx')
+conn, cur = connectDB.connect_db()
 
 
 def demo():
